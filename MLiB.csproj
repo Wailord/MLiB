@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="MLBClosingPitcher.cs" />
     <Compile Include="MLBCompletedGame.cs" />
+    <Compile Include="MLBExpandedCompletedGame.cs" />
     <Compile Include="MLBFutureGame.cs" />
     <Compile Include="MLBInning.cs" />
     <Compile Include="MLBInProgressGame.cs" />

@@ -11,6 +11,7 @@ namespace MLiB
     {
         private string park;
         private string id;
+        private string data_dir;
         private MLBTeam away_team;
         private MLBTeam home_team;
         private List<MLBInning> innings = new List<MLBInning>();
@@ -68,6 +69,8 @@ namespace MLiB
             int runs, hits, errors, sb, hr;
 
             IEnumerable<XElement> i_innings = game.Element("linescore").Elements("inning");
+            data_dir = game.Attribute("game_data_directory").Value;
+
 
             winner = new MLBDecisionPitcher(
                 Convert.ToInt32(game.Element("winning_pitcher").Attribute("id").Value),
@@ -154,5 +157,12 @@ namespace MLiB
             id = game.Attribute("id").Value;
             park = game.Attribute("venue").Value;
         }
-    }
+        
+        public MLBExpandedCompletedGame GetExpandedGame()
+        {
+            return new MLBExpandedCompletedGame(
+                XDocument.Load("http://gd2.mlb.com/" +
+                data_dir + "boxscore.xml").Element("boxscore"));
+        }
+    } 
 }
