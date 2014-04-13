@@ -10,9 +10,10 @@ namespace MLiB
 {
     public class MLBGameInProgress : MLBGame
     {
-        private string park;
-        private string id;
         private string last_play;
+        private int cur_balls;
+        private int cur_strikes;
+        private int cur_outs;
         private MLBPitcher cur_pitcher;
         private MLBBatter cur_batter;
         private MLBTeamActive away_team;
@@ -20,6 +21,21 @@ namespace MLiB
         private List<MLBInning> innings = new List<MLBInning>();
         private BaseSituations base_situation;
         private string inning_half;
+
+        public int Outs
+        {
+            get { return cur_outs; }
+        }
+
+        public int Strikes
+        {
+            get { return cur_strikes; }
+        }
+
+        public int Balls
+        {
+            get { return cur_balls; }
+        }
 
         public string HalfInning
         {
@@ -84,6 +100,9 @@ namespace MLiB
 
             inning_half = game.Element("status").Attribute("inning_state").Value;
 
+            if (inning_half == "")
+                inning_half = "Top";
+
             runs = Convert.ToInt32(game.Element("linescore").Element("r").Attribute("away").Value);
             hits = Convert.ToInt32(game.Element("linescore").Element("h").Attribute("away").Value);
             errors = Convert.ToInt32(game.Element("linescore").Element("e").Attribute("away").Value);
@@ -123,10 +142,7 @@ namespace MLiB
                 hits,
                 errors
                 );
-
-            id = game.Attribute("id").Value;
-            park = game.Attribute("venue").Value;
-
+            
             last_play = Regex.Replace(game.Element("pbp").Attribute("last").Value, @"\s+", " ");
 
             cur_batter = new MLBBatter(
@@ -181,6 +197,10 @@ namespace MLiB
                     base_situation = BaseSituations.BasesLoaded;
                     break;
             }
+
+            cur_balls = Convert.ToInt32(game.Element("status").Attribute("b").Value);
+            cur_strikes = Convert.ToInt32(game.Element("status").Attribute("s").Value);
+            cur_outs = Convert.ToInt32(game.Element("status").Attribute("o").Value);
         }
     }
 }
