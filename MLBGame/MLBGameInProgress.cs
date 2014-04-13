@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace MLiB
 {
@@ -119,7 +120,8 @@ namespace MLiB
             id = game.Attribute("id").Value;
             park = game.Attribute("venue").Value;
 
-            last_play = game.Element("pbp").Attribute("last").Value;
+            last_play = Regex.Replace(game.Element("pbp").Attribute("last").Value, @"\s+", " ");
+
             cur_batter = new MLBBatter(
                 Convert.ToInt32(game.Element("batter").Attribute("id").Value),
                 game.Element("batter").Attribute("last").Value,

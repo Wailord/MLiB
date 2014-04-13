@@ -17,8 +17,40 @@ namespace MLiB
         private MLBPitcher away_prob;
         private MLBPitcher home_prob;
 
+        public string Ballpark
+        {
+            get { return park; }
+        }
+
+        public string ID
+        {
+            get { return id; }
+        }
+
+        public MLBTeam AwayTeam
+        {
+            get { return away_team; }
+        }
+
+        public MLBTeam HomeTeam
+        {
+            get { return home_team; }
+        }
+
+        public MLBPitcher AwayProbableStarter
+        {
+            get { return away_prob; }
+        }
+
+        public MLBPitcher HomeProbableStarter
+        {
+            get { return home_prob; }
+        }
+
         public MLBGameFuture(XElement game)
         {
+            float era;
+
             away_team = new MLBTeam(
                game.Attribute("away_team_city").Value,
                game.Attribute("away_team_name").Value,
@@ -43,6 +75,67 @@ namespace MLiB
 
             id = game.Attribute("id").Value;
             park = game.Attribute("venue").Value;
+
+            data_dir = game.Attribute("game_data_directory").Value;
+
+            if (game.Element("home_probable_pitcher").Attribute("id").Value == "")
+            {
+                home_prob = new MLBPitcher(
+                    0,
+                    "N/A",
+                    "N/A",
+                    0,
+                    0,
+                    0,
+                    0);
+            }
+            else
+            {
+                if (game.Element("home_probable_pitcher").Attribute("era").Value == "-.--")
+                    era = 0;
+                else
+                {
+                    era = Convert.ToSingle(game.Element("home_probable_pitcher").Attribute("era").Value);
+
+                    home_prob = new MLBPitcher(
+                        Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("id").Value),
+                        game.Element("home_probable_pitcher").Attribute("last").Value,
+                        game.Element("home_probable_pitcher").Attribute("first").Value,
+                        Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("number").Value),
+                        era,
+                        Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("wins").Value),
+                        Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("losses").Value)
+                        );
+                }
+            }
+
+            if (game.Element("away_probable_pitcher").Attribute("id").Value == "")
+            {
+                away_prob = new MLBPitcher(
+                    0,
+                    "N/A",
+                    "N/A",
+                    0,
+                    0,
+                    0,
+                    0);
+            }
+            else
+            {
+                if (game.Element("away_probable_pitcher").Attribute("era").Value == "-.--")
+                    era = 0;
+                else
+                    era = Convert.ToSingle(game.Element("away_probable_pitcher").Attribute("era").Value);
+                away_prob = new MLBPitcher(
+                    Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("id").Value),
+                    game.Element("away_probable_pitcher").Attribute("last").Value,
+                    game.Element("away_probable_pitcher").Attribute("first").Value,
+                    Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("number").Value),
+                    era,
+                    Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("wins").Value),
+                    Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("losses").Value)
+                    );
+            }
         }
     }
 }
