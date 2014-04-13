@@ -11,8 +11,6 @@ namespace MLiB
         private int runs;
         private int hits;
         private int errors;
-        private int sb;
-        private int hr;
 
         public int Runs
         {
@@ -29,25 +27,13 @@ namespace MLiB
             get { return errors; }
         }
 
-        public int StolenBases
-        {
-            get { return sb; }
-        }
-
-        public int HomeRuns
-        {
-            get { return hr; }
-        }
-
         public MLBTeamActive(string city, string name, string division, string league, string gb,
-            string gbwc, int wins, int losses, int runs, int hits, int errors, int hr, int sb)
+            string gbwc, int wins, int losses, int runs, int hits, int errors)
             : base(city, name, division, league, gb, gbwc, wins, losses)
         {
             this.runs = runs;
             this.hits = hits;
             this.errors = errors;
-            this.sb = sb;
-            this.hr = hr;
         }
     }
 }

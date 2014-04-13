@@ -93,9 +93,7 @@ namespace MLiB
                 Convert.ToInt32(game.Attribute("away_loss").Value),
                 runs,
                 hits,
-                errors,
-                hr,
-                sb
+                errors
                 );
 
             runs = Convert.ToInt32(game.Element("linescore").Element("r").Attribute("home").Value);
@@ -115,9 +113,7 @@ namespace MLiB
                 Convert.ToInt32(game.Attribute("home_loss").Value),
                 runs,
                 hits,
-                errors,
-                hr,
-                sb
+                errors
                 );
 
             id = game.Attribute("id").Value;

@@ -54,8 +54,8 @@ namespace MLiB
         public MLBGameCompleted(XElement game)
             : base(game)
         {
-            int aruns, ahits, aerrors, asb, ahr;
-            int hruns, hhits, herrors, hsb, hhr;
+            int aruns, ahits, aerrors;
+            int hruns, hhits, herrors;
             bool away_won;
 
             IEnumerable<XElement> i_innings = game.Element("linescore").Elements("inning");
@@ -101,14 +101,10 @@ namespace MLiB
             aruns = Convert.ToInt32(game.Element("linescore").Element("r").Attribute("away").Value);
             ahits = Convert.ToInt32(game.Element("linescore").Element("h").Attribute("away").Value);
             aerrors = Convert.ToInt32(game.Element("linescore").Element("e").Attribute("away").Value);
-            asb = Convert.ToInt32(game.Element("linescore").Element("sb").Attribute("away").Value);
-            ahr = Convert.ToInt32(game.Element("linescore").Element("hr").Attribute("away").Value);
 
             hruns = Convert.ToInt32(game.Element("linescore").Element("r").Attribute("home").Value);
             hhits = Convert.ToInt32(game.Element("linescore").Element("h").Attribute("home").Value);
             herrors = Convert.ToInt32(game.Element("linescore").Element("e").Attribute("home").Value);
-            hsb = Convert.ToInt32(game.Element("linescore").Element("sb").Attribute("home").Value);
-            hhr = Convert.ToInt32(game.Element("linescore").Element("hr").Attribute("home").Value);
 
             away_won = (aruns > hruns);
 
@@ -124,8 +120,6 @@ namespace MLiB
                 aruns,
                 ahits,
                 aerrors,
-                ahr,
-                asb,
                 away_won
                 );
 
@@ -141,8 +135,6 @@ namespace MLiB
                     hruns,
                     hhits,
                     herrors,
-                    hhr,
-                    hsb,
                     !away_won
                     );
         }

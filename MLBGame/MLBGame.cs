@@ -34,8 +34,9 @@ namespace MLiB
         {
             data_dir = game.Attribute("game_data_directory").Value;
             id = game.Attribute("id").Value;
-            park = game.Attribute("venue").Value; 
-            start = DateTime.ParseExact(game.Attribute("time_date").Value, "yyyy/MM/dd h:mm", CultureInfo.InvariantCulture);
+            park = game.Attribute("venue").Value;
+            string startTime = game.Attribute("original_date").Value + " " + game.Attribute("time").Value;
+            start = DateTime.ParseExact(startTime, "yyyy/MM/dd h:mm", CultureInfo.InvariantCulture);
 
             if (game.Attribute("ampm").Value == "PM")
                 start = start.AddHours(12);

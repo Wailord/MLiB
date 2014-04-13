@@ -30,31 +30,37 @@ namespace MLiB
 
         public MLBScoreboardOnDay(DateTime date)
         {
-            IEnumerable<XElement> todays_games = XDocument.Load("http://gd2.mlb.com/components/game/mlb/year_"
-                + date.Year + "/month_" + (date.Month <= 9 ? "0" : "")
-                + date.Month + "/day_" + (date.Day <= 9 ? "0" : "")
-                + date.Day + "/master_scoreboard.xml").Element("games").Elements("game");
-
-            foreach (XElement game in todays_games)
+            try
             {
-                switch (game.Element("status").Attribute("status").Value)
+                IEnumerable<XElement> todays_games = XDocument.Load("http://gd2.mlb.com/components/game/mlb/year_"
+                    + date.Year + "/month_" + (date.Month <= 9 ? "0" : "")
+                    + date.Month + "/day_" + (date.Day <= 9 ? "0" : "")
+                    + date.Day + "/master_scoreboard.xml").Element("games").Elements("game");
+
+                foreach (XElement game in todays_games)
                 {
-                    case "Final":
-                        completed_games.Add(new MLBGameCompleted(game));
-                        break;
-                    case "Warmup":
-                        ongoing_games.Add(new MLBGameInProgress(game));
-                        break;
-                    case "Pre-game":
-                        ongoing_games.Add(new MLBGameInProgress(game));
-                        break;
-                    case "In Progress":
-                        ongoing_games.Add(new MLBGameInProgress(game));
-                        break;
-                    case "Preview":
-                        future_games.Add(new MLBGameFuture(game));
-                        break;
+                    switch (game.Element("status").Attribute("status").Value)
+                    {
+                        case "Final":
+                            completed_games.Add(new MLBGameCompleted(game));
+                            break;
+                        case "Warmup":
+                            ongoing_games.Add(new MLBGameInProgress(game));
+                            break;
+                        case "Pre-game":
+                            ongoing_games.Add(new MLBGameInProgress(game));
+                            break;
+                        case "In Progress":
+                            ongoing_games.Add(new MLBGameInProgress(game));
+                            break;
+                        case "Preview":
+                            future_games.Add(new MLBGameFuture(game));
+                            break;
+                    }
                 }
+            }
+            catch (System.Net.WebException)
+            {
             }
         }
     }
