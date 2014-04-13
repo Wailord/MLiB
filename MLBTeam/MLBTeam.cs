@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Net;
+using System.IO;
 
 namespace MLiB
 {
@@ -17,6 +20,18 @@ namespace MLiB
         protected int m_wins;
         protected int m_losses;
         protected string abb;
+
+        public Image Logo
+        {
+            get
+            {
+                HttpWebRequest httpWebRequest =
+                    (HttpWebRequest)HttpWebRequest.Create("http://www.mlb.com/mlb/images/team_logos/logo_" + abb.ToLower() + "_79x76.jpg");
+                HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                Stream stream = httpWebReponse.GetResponseStream();
+                return Image.FromStream(stream);
+            }
+        }
 
         public string Abbreviation
         {

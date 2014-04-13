@@ -147,7 +147,7 @@ namespace MLiB
         {
             return String.Format(away_team.Abbreviation + " "
                 + away_team.Runs + ", " + home_team.Abbreviation
-                + " " + home_team.Runs);
+                + " " + home_team.Runs + " - F");
         }
     }
 }

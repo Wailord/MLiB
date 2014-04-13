@@ -48,26 +48,43 @@ namespace MLiB
                     switch (game.Element("status").Attribute("status").Value)
                     {
                         case "Final":
-                            all_games.Add(new MLBGameCompleted(game));
+                            completed_games.Add(new MLBGameCompleted(game));
+                            break;
+                        case "Game Over":
                             completed_games.Add(new MLBGameCompleted(game));
                             break;
                         case "Warmup":
-                            all_games.Add(new MLBGameInProgress(game));
                             ongoing_games.Add(new MLBGameInProgress(game));
                             break;
-                        case "Pre-game":
-                            all_games.Add(new MLBGameInProgress(game));
+                        case "Pre-Game":
                             ongoing_games.Add(new MLBGameInProgress(game));
                             break;
                         case "In Progress":
-                            all_games.Add(new MLBGameInProgress(game));
                             ongoing_games.Add(new MLBGameInProgress(game));
                             break;
                         case "Preview":
-                            all_games.Add(new MLBGameFuture(game));
                             future_games.Add(new MLBGameFuture(game));
                             break;
+                        case "Delayed":
+                            ongoing_games.Add(new MLBGameInProgress(game));
+                            break;
+                        default:
+                            Console.Write(game.Element("status").Attribute("status").Value);
+                            break;
                     }
+                }
+
+                foreach (MLBGameInProgress game in ongoing_games)
+                {
+                    all_games.Add(game);
+                }
+                foreach (MLBGameFuture game in future_games)
+                {
+                    all_games.Add(game);
+                }
+                foreach (MLBGameCompleted game in completed_games)
+                {
+                    all_games.Add(game);
                 }
             }
             catch (System.Net.WebException)
