@@ -42,11 +42,10 @@
     <Compile Include="MLBPlayer\MLBBatter.cs" />
     <Compile Include="MLBPlayer\MLBPitcherClosing.cs" />
     <Compile Include="MLBGame\MLBGameCompleted.cs" />
-    <Compile Include="MLBGame\MLBGameCompletedExpanded.cs" />
     <Compile Include="MLBGame\MLBGameFuture.cs" />
-    <Compile Include="MLBGame\MLBInning.cs" />
+    <Compile Include="MLBInning.cs" />
     <Compile Include="MLBGame\MLBGameInProgress.cs" />
-    <Compile Include="MLBGame\MLBScoreboardOnDay.cs" />
+    <Compile Include="MLBScoreboardOnDay.cs" />
     <Compile Include="MLBTeam\MLBTeam.cs" />
     <Compile Include="MLBPlayer\MLBPitcher.cs" />
     <Compile Include="MLBTeam\MLBTeamActive.cs" />

@@ -17,13 +17,6 @@ namespace MLiB
         private int m_wins;
         private int m_losses;
 
-        // for children
-        //private int m_r;
-        //private int m_h;
-        //private int m_e;
-        //private int m_sb;
-        //private int m_hr;
-
         public string City
         {
             get { return m_city; }
@@ -70,35 +63,8 @@ namespace MLiB
             get { return m_losses; }
         }
 
-        //public int Runs
-        //{
-        //    get { return m_r; }
-        //}
-
-        //public int Hits
-        //{
-        //    get { return m_h; }
-        //}
-
-        //public int Errors
-        //{
-        //    get { return m_e; }
-        //}
-
-        //public int HomeRuns
-        //{
-        //    get { return m_hr; }
-        //}
-
-        //public int StolenBases
-        //{
-        //    get { return m_sb; }
-        //}
-
-
-
         public MLBTeam(string city, string name, string division, string league, string gb,
-            string gbwc, int wins, int losses, int runs, int hits, int errors, int hr, int sb)
+            string gbwc, int wins, int losses)
         {
             m_city = city;
             m_name = name;
@@ -108,11 +74,6 @@ namespace MLiB
             m_gbwc = gbwc;
             m_wins = wins;
             m_losses = losses;
-            //m_r = runs;
-            //m_h = hits;
-            //m_e = errors;
-            //m_hr = hr;
-            //m_sb = sb;
         }
     }
 }

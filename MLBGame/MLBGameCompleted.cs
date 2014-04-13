@@ -12,8 +12,8 @@ namespace MLiB
         private string park;
         private string id;
         private string data_dir;
-        private MLBTeam away_team;
-        private MLBTeam home_team;
+        private MLBTeamCompleted away_team;
+        private MLBTeamCompleted home_team;
         private List<MLBInning> innings = new List<MLBInning>();
         private MLBPitcher winner;
         private MLBPitcher loser;
@@ -49,12 +49,12 @@ namespace MLiB
             get { return id; }
         }
 
-        public MLBTeam AwayTeam
+        public MLBTeamCompleted AwayTeam
         {
             get { return away_team; }
         }
 
-        public MLBTeam HomeTeam
+        public MLBTeamCompleted HomeTeam
         {
             get { return home_team; }
         }
@@ -116,7 +116,7 @@ namespace MLiB
             sb = Convert.ToInt32(game.Element("linescore").Element("sb").Attribute("away").Value);
             hr = Convert.ToInt32(game.Element("linescore").Element("hr").Attribute("away").Value);
 
-            away_team = new MLBTeam(
+            away_team = new MLBTeamCompleted(
                 game.Attribute("away_team_city").Value,
                 game.Attribute("away_team_name").Value,
                 game.Attribute("away_division").Value,
@@ -138,7 +138,7 @@ namespace MLiB
             sb = Convert.ToInt32(game.Element("linescore").Element("sb").Attribute("home").Value);
             hr = Convert.ToInt32(game.Element("linescore").Element("hr").Attribute("home").Value);
 
-            home_team = new MLBTeam(
+            home_team = new MLBTeamCompleted(
                 game.Attribute("home_team_city").Value,
                 game.Attribute("home_team_name").Value,
                 game.Attribute("home_division").Value,
@@ -156,13 +156,6 @@ namespace MLiB
 
             id = game.Attribute("id").Value;
             park = game.Attribute("venue").Value;
-        }
-        
-        public MLBGameCompletedExpanded GetExpandedGame()
-        {
-            return new MLBGameCompletedExpanded(
-                XDocument.Load("http://gd2.mlb.com/" +
-                data_dir + "boxscore.xml").Element("boxscore"));
         }
     } 
 }

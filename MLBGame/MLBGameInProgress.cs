@@ -14,8 +14,8 @@ namespace MLiB
         private string last_play;
         private MLBPitcher cur_pitcher;
         private MLBBatter cur_batter;
-        private MLBTeam away_team;
-        private MLBTeam home_team;
+        private MLBTeamActive away_team;
+        private MLBTeamActive home_team;
         private List<MLBInning> innings = new List<MLBInning>();
 
         public string LastPlay
@@ -43,12 +43,12 @@ namespace MLiB
             get { return id; }
         }
 
-        public MLBTeam AwayTeam
+        public MLBTeamActive AwayTeam
         {
             get { return away_team; }
         }
 
-        public MLBTeam HomeTeam
+        public MLBTeamActive HomeTeam
         {
             get { return home_team; }
         }
@@ -78,7 +78,7 @@ namespace MLiB
             sb = Convert.ToInt32(game.Element("linescore").Element("sb").Attribute("away").Value);
             hr = Convert.ToInt32(game.Element("linescore").Element("hr").Attribute("away").Value);
 
-            away_team = new MLBTeam(
+            away_team = new MLBTeamActive(
                 game.Attribute("away_team_city").Value,
                 game.Attribute("away_team_name").Value,
                 game.Attribute("away_division").Value,
@@ -100,7 +100,7 @@ namespace MLiB
             sb = Convert.ToInt32(game.Element("linescore").Element("sb").Attribute("home").Value);
             hr = Convert.ToInt32(game.Element("linescore").Element("hr").Attribute("home").Value);
 
-            home_team = new MLBTeam(
+            home_team = new MLBTeamActive(
                 game.Attribute("home_team_city").Value,
                 game.Attribute("home_team_name").Value,
                 game.Attribute("home_division").Value,
