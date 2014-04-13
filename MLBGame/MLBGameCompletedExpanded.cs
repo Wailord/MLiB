@@ -7,9 +7,9 @@ using System.Xml.Linq;
 
 namespace MLiB
 {
-    public class MLBExpandedCompletedGame
+    public class MLBGameCompletedExpanded
     {
-        public MLBExpandedCompletedGame(XElement game)
+        public MLBGameCompletedExpanded(XElement game)
         {
             
         }

@@ -9,21 +9,21 @@ namespace MLiB
 {
     public class MLBScoreboardOnDay
     {
-        private List<MLBInProgressGame> ongoing_games = new List<MLBInProgressGame>();
-        private List<MLBFutureGame> future_games = new List<MLBFutureGame>();
-        private List<MLBCompletedGame> completed_games = new List<MLBCompletedGame>();
+        private List<MLBGameInProgress> ongoing_games = new List<MLBGameInProgress>();
+        private List<MLBGameFuture> future_games = new List<MLBGameFuture>();
+        private List<MLBGameCompleted> completed_games = new List<MLBGameCompleted>();
 
-        public List<MLBCompletedGame> CompletedGames
+        public List<MLBGameCompleted> CompletedGames
         {
             get { return completed_games; }
         }
 
-        public List<MLBInProgressGame> InProgressGames
+        public List<MLBGameInProgress> InProgressGames
         {
             get { return ongoing_games; }
         }
 
-        public List<MLBFutureGame> FutureGames
+        public List<MLBGameFuture> FutureGames
         {
             get { return future_games; }
         }
@@ -40,19 +40,19 @@ namespace MLiB
                 switch (game.Element("status").Attribute("status").Value)
                 {
                     case "Final":
-                        completed_games.Add(new MLBCompletedGame(game));
+                        completed_games.Add(new MLBGameCompleted(game));
                         break;
                     case "Warmup":
-                        ongoing_games.Add(new MLBInProgressGame(game));
+                        ongoing_games.Add(new MLBGameInProgress(game));
                         break;
                     case "Pre-game":
-                        ongoing_games.Add(new MLBInProgressGame(game));
+                        ongoing_games.Add(new MLBGameInProgress(game));
                         break;
                     case "In Progress":
-                        ongoing_games.Add(new MLBInProgressGame(game));
+                        ongoing_games.Add(new MLBGameInProgress(game));
                         break;
                     case "Preview":
-                        future_games.Add(new MLBFutureGame(game));
+                        future_games.Add(new MLBGameFuture(game));
                         break;
                 }
             }

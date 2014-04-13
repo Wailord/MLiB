@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace MLiB
 {
-    public class MLBCompletedGame
+    public class MLBGameCompleted
     {
         private string park;
         private string id;
@@ -17,7 +17,7 @@ namespace MLiB
         private List<MLBInning> innings = new List<MLBInning>();
         private MLBPitcher winner;
         private MLBPitcher loser;
-        private MLBClosingPitcher closer;
+        private MLBPitcherClosing closer;
 
         public bool Saved
         {
@@ -34,7 +34,7 @@ namespace MLiB
             get { return loser; }
         }
 
-        public MLBClosingPitcher SavePitcher
+        public MLBPitcherClosing SavePitcher
         {
             get { return closer; }
         }
@@ -64,7 +64,7 @@ namespace MLiB
             get { return innings; }
         }
 
-        public MLBCompletedGame(XElement game)
+        public MLBGameCompleted(XElement game)
         {
             int runs, hits, errors, sb, hr;
 
@@ -91,7 +91,7 @@ namespace MLiB
                 Convert.ToInt32(game.Element("losing_pitcher").Attribute("losses").Value));
 
             if (game.Element("save_pitcher").Attribute("id").Value != "")
-                closer = new MLBClosingPitcher(
+                closer = new MLBPitcherClosing(
                     Convert.ToInt32(game.Element("save_pitcher").Attribute("id").Value),
                     game.Element("save_pitcher").Attribute("last").Value,
                     game.Element("save_pitcher").Attribute("first").Value,
@@ -158,9 +158,9 @@ namespace MLiB
             park = game.Attribute("venue").Value;
         }
         
-        public MLBExpandedCompletedGame GetExpandedGame()
+        public MLBGameCompletedExpanded GetExpandedGame()
         {
-            return new MLBExpandedCompletedGame(
+            return new MLBGameCompletedExpanded(
                 XDocument.Load("http://gd2.mlb.com/" +
                 data_dir + "boxscore.xml").Element("boxscore"));
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MLiB
 {
-    public class MLBClosingPitcher
+    public class MLBPitcherClosing
     {
         private string last, first;
         private int num, w, l, sv, svo, id;
@@ -57,7 +57,7 @@ namespace MLiB
             get { return svo; }
         }
 
-        public MLBClosingPitcher(int id, string last, string first, int num, float ERA, int sv, int svo, int w, int l)
+        public MLBPitcherClosing(int id, string last, string first, int num, float ERA, int sv, int svo, int w, int l)
         {
             this.id = id;
             this.last = last;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MLiB
 {
-    public class MLBParser
+    class MLBTeamCompleted
     {
     }
 }

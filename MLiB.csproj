@@ -39,17 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MLBBatter.cs" />
-    <Compile Include="MLBClosingPitcher.cs" />
-    <Compile Include="MLBCompletedGame.cs" />
-    <Compile Include="MLBExpandedCompletedGame.cs" />
-    <Compile Include="MLBFutureGame.cs" />
-    <Compile Include="MLBInning.cs" />
-    <Compile Include="MLBInProgressGame.cs" />
-    <Compile Include="MLBParser.cs" />
-    <Compile Include="MLBScoreboardOnDay.cs" />
-    <Compile Include="MLBTeam.cs" />
-    <Compile Include="MLBPitcher.cs" />
+    <Compile Include="MLBPlayer\MLBBatter.cs" />
+    <Compile Include="MLBPlayer\MLBPitcherClosing.cs" />
+    <Compile Include="MLBGame\MLBGameCompleted.cs" />
+    <Compile Include="MLBGame\MLBGameCompletedExpanded.cs" />
+    <Compile Include="MLBGame\MLBGameFuture.cs" />
+    <Compile Include="MLBGame\MLBInning.cs" />
+    <Compile Include="MLBGame\MLBGameInProgress.cs" />
+    <Compile Include="MLBGame\MLBScoreboardOnDay.cs" />
+    <Compile Include="MLBTeam\MLBTeam.cs" />
+    <Compile Include="MLBPlayer\MLBPitcher.cs" />
+    <Compile Include="MLBTeam\MLBTeamActive.cs" />
+    <Compile Include="MLBTeam\MLBTeamCompleted.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

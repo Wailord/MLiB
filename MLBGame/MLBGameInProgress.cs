@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace MLiB
 {
-    public class MLBInProgressGame
+    public class MLBGameInProgress
     {
         private string park;
         private string id;
@@ -58,7 +58,7 @@ namespace MLiB
             get { return innings; }
         }
 
-        public MLBInProgressGame(XElement game)
+        public MLBGameInProgress(XElement game)
         {
             int runs, hits, errors, sb, hr;
 
