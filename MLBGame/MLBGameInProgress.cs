@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace MLiB
 {
-    public class MLBGameInProgress
+    public class MLBGameInProgress : MLBGame
     {
         private string park;
         private string id;
@@ -46,16 +46,6 @@ namespace MLiB
             get { return cur_batter; }
         }
 
-        public string Ballpark
-        {
-            get { return park; }
-        }
-
-        public string ID
-        {
-            get { return id; }
-        }
-
         public MLBTeamActive AwayTeam
         {
             get { return away_team; }
@@ -71,7 +61,8 @@ namespace MLiB
             get { return innings; }
         }
 
-        public MLBGameInProgress(XElement game)
+        public MLBGameInProgress(XElement game) : 
+            base(game)
         {
             int runs, hits, errors, sb, hr;
 

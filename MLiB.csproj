@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MLBGame\MLBGame.cs" />
     <Compile Include="MLBPlayer\MLBBatter.cs" />
     <Compile Include="MLBPlayer\MLBPitcherClosing.cs" />
     <Compile Include="MLBGame\MLBGameCompleted.cs" />

@@ -7,11 +7,8 @@ using System.Xml.Linq;
 
 namespace MLiB
 {
-    public class MLBGameCompleted
+    public class MLBGameCompleted : MLBGame
     {
-        private string park;
-        private string id;
-        private string data_dir;
         private MLBTeamCompleted away_team;
         private MLBTeamCompleted home_team;
         private List<MLBInning> innings = new List<MLBInning>();
@@ -39,16 +36,6 @@ namespace MLiB
             get { return closer; }
         }
 
-        public string Ballpark
-        {
-            get { return park; }
-        }
-
-        public string ID
-        {
-            get { return id; }
-        }
-
         public MLBTeamCompleted AwayTeam
         {
             get { return away_team; }
@@ -65,14 +52,13 @@ namespace MLiB
         }
 
         public MLBGameCompleted(XElement game)
+            : base(game)
         {
             int aruns, ahits, aerrors, asb, ahr;
             int hruns, hhits, herrors, hsb, hhr;
             bool away_won;
 
             IEnumerable<XElement> i_innings = game.Element("linescore").Elements("inning");
-            data_dir = game.Attribute("game_data_directory").Value;
-
 
             winner = new MLBPitcher(
                 Convert.ToInt32(game.Element("winning_pitcher").Attribute("id").Value),
@@ -143,25 +129,22 @@ namespace MLiB
                 away_won
                 );
 
-            home_team = new MLBTeamCompleted(
-                game.Attribute("home_team_city").Value,
-                game.Attribute("home_team_name").Value,
-                game.Attribute("home_division").Value,
-                game.Attribute("home_league_id").Value,
-                game.Attribute("home_games_back").Value,
-                game.Attribute("home_games_back_wildcard").Value,
-                Convert.ToInt32(game.Attribute("home_win").Value),
-                Convert.ToInt32(game.Attribute("home_loss").Value),
-                hruns,
-                hhits,
-                herrors,
-                hhr,
-                hsb,
-                !away_won
-                );
-
-            id = game.Attribute("id").Value;
-            park = game.Attribute("venue").Value;
+                home_team = new MLBTeamCompleted(
+                    game.Attribute("home_team_city").Value,
+                    game.Attribute("home_team_name").Value,
+                    game.Attribute("home_division").Value,
+                    game.Attribute("home_league_id").Value,
+                    game.Attribute("home_games_back").Value,
+                    game.Attribute("home_games_back_wildcard").Value,
+                    Convert.ToInt32(game.Attribute("home_win").Value),
+                    Convert.ToInt32(game.Attribute("home_loss").Value),
+                    hruns,
+                    hhits,
+                    herrors,
+                    hhr,
+                    hsb,
+                    !away_won
+                    );
         }
     }
 }

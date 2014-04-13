@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using System.Globalization;
 
 namespace MLiB
 {
-    public class MLBGameFuture
+    public class MLBGameFuture : MLBGame
     {
         private string park;
         private string id;
@@ -17,22 +16,6 @@ namespace MLiB
         private MLBTeam home_team;
         private MLBPitcher away_prob;
         private MLBPitcher home_prob;
-        private DateTime start;
-
-        public DateTime StartTime
-        {
-            get { return start; }
-        }
-
-        public string Ballpark
-        {
-            get { return park; }
-        }
-
-        public string ID
-        {
-            get { return id; }
-        }
 
         public MLBTeam AwayTeam
         {
@@ -55,6 +38,7 @@ namespace MLiB
         }
 
         public MLBGameFuture(XElement game)
+            : base(game)
         {
             float era;
 
@@ -143,11 +127,6 @@ namespace MLiB
                     Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("losses").Value)
                     );
             }
-
-            start = DateTime.ParseExact(game.Attribute("time_date").Value, "yyyy/MM/dd h:mm", CultureInfo.InvariantCulture);
-            
-            if (game.Attribute("ampm").Value == "PM")
-                start = start.AddHours(12);
         }
     }
 }
