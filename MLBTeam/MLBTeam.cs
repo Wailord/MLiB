@@ -8,15 +8,15 @@ namespace MLiB
 {
     public class MLBTeam
     {
-        private string m_city;
-        private string m_name;
-        private string m_division;
-        private string m_league;
-        private string m_gb;
-        private string m_gbwc;
-        private int m_wins;
-        private int m_losses;
-        private string abb;
+        protected string m_city;
+        protected string m_name;
+        protected string m_division;
+        protected string m_league;
+        protected string m_gb;
+        protected string m_gbwc;
+        protected int m_wins;
+        protected int m_losses;
+        protected string abb;
 
         public string Abbreviation
         {

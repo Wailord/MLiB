@@ -139,6 +139,15 @@ namespace MLiB
                     herrors,
                     !away_won
                     );
+
+                status = GameStatus.Completed;
+        }
+
+        public override string ToString()
+        {
+            return String.Format(away_team.Abbreviation + " "
+                + away_team.Runs + ", " + home_team.Abbreviation
+                + " " + home_team.Runs);
         }
     }
 }

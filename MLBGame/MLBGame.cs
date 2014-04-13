@@ -8,12 +8,23 @@ using System.Globalization;
 
 namespace MLiB
 {
-    public class MLBGame
+    public abstract class MLBGame
     {
         protected string park;
         protected string id;
         protected string data_dir;
         protected DateTime start;
+        protected GameStatus status;
+
+        public enum GameStatus
+        {
+            Completed, Future, InProgress
+        };
+
+        public GameStatus Status
+        {
+            get { return status; }
+        }
 
         public DateTime StartTime
         {
@@ -41,5 +52,7 @@ namespace MLiB
             if (game.Attribute("ampm").Value == "PM")
                 start = start.AddHours(12);
         }
+
+        public override abstract string ToString();
     }
 }

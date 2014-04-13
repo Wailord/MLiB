@@ -9,9 +9,6 @@ namespace MLiB
 {
     public class MLBGameFuture : MLBGame
     {
-        private string park;
-        private string id;
-        private string data_dir;
         private MLBTeam away_team;
         private MLBTeam home_team;
         private MLBPitcher away_prob;
@@ -129,6 +126,15 @@ namespace MLiB
                     Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("losses").Value)
                     );
             }
+
+            status = GameStatus.Future;
+        }
+        
+        public override string ToString()
+        {
+            return String.Format(away_team.Abbreviation + " ("
+                + away_team.Wins + "-" + away_team.Losses + ") @ " + home_team.Abbreviation
+                + " (" + home_team.Wins + "-" + home_team.Losses + ")");
         }
     }
 }

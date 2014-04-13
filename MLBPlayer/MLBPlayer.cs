@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Net;
+using System.IO;
 
 namespace MLiB
 {
@@ -12,6 +15,17 @@ namespace MLiB
         protected string last;
         protected string first;
         protected int number;
+
+        public Image Thumbnail
+        {
+            get
+            {
+                HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create("http://mlb.mlb.com/images/players/assets/68_" + id + ".png");
+                HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                Stream stream = httpWebReponse.GetResponseStream();
+                return Image.FromStream(stream);
+            }
+        }
 
         public int ID
         {
@@ -39,6 +53,11 @@ namespace MLiB
             this.last = last;
             this.first = first;
             this.number = number;
+        }
+
+        public override string ToString()
+        {
+            return last + ", " + first;
         }
     }
 }

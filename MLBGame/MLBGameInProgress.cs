@@ -87,6 +87,7 @@ namespace MLiB
             base(game)
         {
             int runs, hits, errors, sb, hr;
+            float era;
 
             IEnumerable<XElement> i_innings = game.Element("linescore").Elements("inning");
 
@@ -163,14 +164,22 @@ namespace MLiB
                 Convert.ToSingle(game.Element("batter").Attribute("obp").Value)
                 );
 
-            cur_pitcher = new MLBPitcher(
-                Convert.ToInt32(game.Element("opposing_pitcher").Attribute("id").Value),
-                game.Element("opposing_pitcher").Attribute("last").Value,
-                game.Element("opposing_pitcher").Attribute("first").Value,
-                Convert.ToInt32(game.Element("opposing_pitcher").Attribute("number").Value),
-                Convert.ToSingle(game.Element("opposing_pitcher").Attribute("era").Value),
-                Convert.ToInt32(game.Element("opposing_pitcher").Attribute("wins").Value),
-                Convert.ToInt32(game.Element("opposing_pitcher").Attribute("losses").Value));
+            if (game.Element("pitcher").Attribute("era").Value == "-.--"
+                || game.Element("pitcher").Attribute("era").Value == "-")
+                era = 0;
+            else
+            {
+                era = Convert.ToSingle(game.Element("pitcher").Attribute("era").Value);
+
+                cur_pitcher = new MLBPitcher(
+                    Convert.ToInt32(game.Element("pitcher").Attribute("id").Value),
+                    game.Element("pitcher").Attribute("last").Value,
+                    game.Element("pitcher").Attribute("first").Value,
+                    Convert.ToInt32(game.Element("pitcher").Attribute("number").Value),
+                    Convert.ToSingle(game.Element("pitcher").Attribute("era").Value),
+                    Convert.ToInt32(game.Element("pitcher").Attribute("wins").Value),
+                    Convert.ToInt32(game.Element("pitcher").Attribute("losses").Value));
+            }
 
             switch (game.Element("runners_on_base").Attribute("status").Value)
             {
@@ -203,6 +212,15 @@ namespace MLiB
             cur_balls = Convert.ToInt32(game.Element("status").Attribute("b").Value);
             cur_strikes = Convert.ToInt32(game.Element("status").Attribute("s").Value);
             cur_outs = Convert.ToInt32(game.Element("status").Attribute("o").Value);
+
+            status = GameStatus.InProgress;
+        }
+
+        public override string ToString()
+        {
+            return String.Format(away_team.Abbreviation + " "
+                 + away_team.Runs + ", " + home_team.Abbreviation
+                 + " " + home_team.Runs + " - " + inning_half + " " + Innings.Count());
         }
     }
 }

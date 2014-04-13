@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.RegularExpressions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +48,7 @@
     <Compile Include="MLBGame\MLBGameFuture.cs" />
     <Compile Include="MLBInning.cs" />
     <Compile Include="MLBGame\MLBGameInProgress.cs" />
+    <Compile Include="MLBPlayer\MLBPlayer.cs" />
     <Compile Include="MLBScoreboardOnDay.cs" />
     <Compile Include="MLBTeam\MLBTeam.cs" />
     <Compile Include="MLBPlayer\MLBPitcher.cs" />
