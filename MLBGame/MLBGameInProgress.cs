@@ -19,11 +19,17 @@ namespace MLiB
         private MLBTeamActive home_team;
         private List<MLBInning> innings = new List<MLBInning>();
         private BaseSituations base_situation;
+        private string inning_half;
+
+        public string HalfInning
+        {
+            get { return inning_half; }
+        }
 
         public enum BaseSituations
         {
-            BasesEmpty = 0, RunnerOnFirst, RunnerOnFirstAndSecond, RunnerOnFirstAndThird,
-            BasesLoaded, RunnerOnSecond, RunnerOnSecondAndThird, RunnerOnThird
+            BasesEmpty = 0, RunnerOnFirst, RunnersOnFirstAndSecond, RunnersOnFirstAndThird,
+            BasesLoaded, RunnerOnSecond, RunnersOnSecondAndThird, RunnerOnThird
         }
 
         public BaseSituations BaseSituation
@@ -75,6 +81,8 @@ namespace MLiB
                 else
                     innings.Add(new MLBInning(inning.Attribute("away").Value, ""));
             }
+
+            inning_half = game.Element("status").Attribute("inning_state").Value;
 
             runs = Convert.ToInt32(game.Element("linescore").Element("r").Attribute("away").Value);
             hits = Convert.ToInt32(game.Element("linescore").Element("h").Attribute("away").Value);
@@ -145,6 +153,34 @@ namespace MLiB
                 Convert.ToSingle(game.Element("opposing_pitcher").Attribute("era").Value),
                 Convert.ToInt32(game.Element("opposing_pitcher").Attribute("wins").Value),
                 Convert.ToInt32(game.Element("opposing_pitcher").Attribute("losses").Value));
+
+            switch (game.Element("runners_on_base").Attribute("status").Value)
+            {
+                case "0":
+                    base_situation = BaseSituations.BasesEmpty;
+                    break;
+                case "1":
+                    base_situation = BaseSituations.RunnerOnFirst;
+                    break;
+                case "2":
+                    base_situation = BaseSituations.RunnerOnSecond;
+                    break;
+                case "3":
+                    base_situation = BaseSituations.RunnerOnThird;
+                    break;
+                case "4":
+                    base_situation = BaseSituations.RunnersOnFirstAndSecond;
+                    break;
+                case "5":
+                    base_situation = BaseSituations.RunnersOnFirstAndThird;
+                    break;
+                case "6":
+                    base_situation = BaseSituations.RunnersOnSecondAndThird;
+                    break;
+                case "7":
+                    base_situation = BaseSituations.BasesLoaded;
+                    break;
+            }
         }
     }
 }

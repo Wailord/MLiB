@@ -23,10 +23,6 @@ namespace MLiB
 
         public MLBInning(string a, string h)
         {
-            if (a == "")
-                a = "-";
-            if (h == "")
-                h = "-";
             aRuns = a;
             hRuns = h;
         }
