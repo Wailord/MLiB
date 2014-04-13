@@ -10,10 +10,10 @@ namespace MLiB
 {
     public class MLBGame
     {
-        private string park;
-        private string id;
-        private string data_dir;
-        private DateTime start;
+        protected string park;
+        protected string id;
+        protected string data_dir;
+        protected DateTime start;
 
         public DateTime StartTime
         {

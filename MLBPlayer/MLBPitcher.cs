@@ -6,31 +6,10 @@ using System.Threading.Tasks;
 
 namespace MLiB
 {
-    public class MLBPitcher
+    public class MLBPitcher : MLBPlayer
     {
-        private string last, first;
-        private int id, num, w, l;
+        private int w, l;
         private float era;
-
-        public int ID
-        {
-            get { return id; }
-        }
-
-        public string LastName
-        {
-            get { return last; }
-        }
-
-        public string FirstName
-        {
-            get { return first; }
-        }
-
-        public int JerseyNumber
-        {
-            get { return num; }
-        }
 
         public int Wins
         {
@@ -49,11 +28,8 @@ namespace MLiB
 
 
         public MLBPitcher(int id, string last, string first, int num, float era, int w, int l)
+            : base(id, last, first, num)
         {
-            this.id = id;
-            this.last = last;
-            this.first = first;
-            this.num = num;
             this.era = era;
             this.w = w;
             this.l = l;

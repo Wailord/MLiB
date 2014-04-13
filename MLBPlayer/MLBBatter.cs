@@ -9,12 +9,8 @@ using System.IO;
 
 namespace MLiB
 {
-    public class MLBBatter
+    public class MLBBatter : MLBPlayer
     {
-        private int id;
-        private string last;
-        private string first;
-        private int number;
         private string pos;
         private int ab;
         private int h;
@@ -34,26 +30,6 @@ namespace MLiB
                 Stream stream = httpWebReponse.GetResponseStream();
                 return Image.FromStream(stream);
             }
-        }
-
-        public int ID
-        {
-            get { return id; }
-        }
-
-        public string LastName
-        {
-            get { return last; }
-        }
-
-        public string FirstName
-        {
-            get { return first; }
-        }
-
-        public int JerseyNumber
-        {
-            get { return number; }
         }
 
         public string Position
@@ -103,11 +79,8 @@ namespace MLiB
 
         public MLBBatter(int ID, string last, string first, int number, string pos,
             int ab, int h, float avg, int hr, int rbi, float slg, float ops, float obp)
+            : base(ID, last, first, number)
         {
-            this.id = ID;
-            this.last = last;
-            this.first = first;
-            this.number = number;
             this.pos = pos;
             this.ab = ab;
             this.h = h;
