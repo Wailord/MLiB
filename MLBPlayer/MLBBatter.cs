@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Net;
+using System.IO;
 
 namespace MLiB
 {
@@ -21,6 +24,17 @@ namespace MLiB
         private float slg;
         private float ops;
         private float obp;
+
+        public Image Thumbnail
+        {
+            get
+            {
+                HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create("http://mlb.mlb.com/images/players/assets/68_" + id + ".png");
+                HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                Stream stream = httpWebReponse.GetResponseStream();
+                return Image.FromStream(stream);
+            }
+        }
 
         public int ID
         {
