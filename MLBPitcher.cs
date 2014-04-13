@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MLiB
 {
-    public class MLBDecisionPitcher
+    public class MLBPitcher
     {
         private string last, first;
         private int id, num, w, l;
@@ -48,7 +48,7 @@ namespace MLiB
         }
 
 
-        public MLBDecisionPitcher(int id, string last, string first, int num, float era, int w, int l)
+        public MLBPitcher(int id, string last, string first, int num, float era, int w, int l)
         {
             this.id = id;
             this.last = last;

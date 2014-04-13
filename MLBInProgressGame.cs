@@ -11,9 +11,27 @@ namespace MLiB
     {
         private string park;
         private string id;
+        private string last_play;
+        private MLBPitcher cur_pitcher;
+        private MLBBatter cur_batter;
         private MLBTeam away_team;
         private MLBTeam home_team;
         private List<MLBInning> innings = new List<MLBInning>();
+
+        public string LastPlay
+        {
+            get { return last_play; }
+        }
+
+        public MLBPitcher NowPitching
+        {
+            get { return cur_pitcher; }
+        }
+
+        public MLBBatter NowBatting
+        {
+            get { return cur_batter; }
+        }
 
         public string Ballpark
         {
@@ -100,6 +118,32 @@ namespace MLiB
 
             id = game.Attribute("id").Value;
             park = game.Attribute("venue").Value;
+
+            last_play = game.Element("pbp").Attribute("last").Value;
+            cur_batter = new MLBBatter(
+                Convert.ToInt32(game.Element("batter").Attribute("id").Value),
+                game.Element("batter").Attribute("last").Value,
+                game.Element("batter").Attribute("first").Value,
+                Convert.ToInt32(game.Element("batter").Attribute("number").Value),
+                game.Element("batter").Attribute("pos").Value,
+                Convert.ToInt32(game.Element("batter").Attribute("ab").Value),
+                Convert.ToInt32(game.Element("batter").Attribute("h").Value),
+                Convert.ToSingle(game.Element("batter").Attribute("avg").Value),
+                Convert.ToInt32(game.Element("batter").Attribute("hr").Value),
+                Convert.ToInt32(game.Element("batter").Attribute("rbi").Value),
+                Convert.ToSingle(game.Element("batter").Attribute("slg").Value),
+                Convert.ToSingle(game.Element("batter").Attribute("ops").Value),
+                Convert.ToSingle(game.Element("batter").Attribute("obp").Value)
+                );
+
+            cur_pitcher = new MLBPitcher(
+                Convert.ToInt32(game.Element("opposing_pitcher").Attribute("id").Value),
+                game.Element("opposing_pitcher").Attribute("last").Value,
+                game.Element("opposing_pitcher").Attribute("first").Value,
+                Convert.ToInt32(game.Element("opposing_pitcher").Attribute("number").Value),
+                Convert.ToSingle(game.Element("opposing_pitcher").Attribute("era").Value),
+                Convert.ToInt32(game.Element("opposing_pitcher").Attribute("wins").Value),
+                Convert.ToInt32(game.Element("opposing_pitcher").Attribute("losses").Value));
         }
     }
 }

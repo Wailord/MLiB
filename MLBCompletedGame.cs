@@ -15,8 +15,8 @@ namespace MLiB
         private MLBTeam away_team;
         private MLBTeam home_team;
         private List<MLBInning> innings = new List<MLBInning>();
-        private MLBDecisionPitcher winner;
-        private MLBDecisionPitcher loser;
+        private MLBPitcher winner;
+        private MLBPitcher loser;
         private MLBClosingPitcher closer;
 
         public bool Saved
@@ -24,12 +24,12 @@ namespace MLiB
             get { return (closer != null); }
         }
 
-        public MLBDecisionPitcher WinningPitcher
+        public MLBPitcher WinningPitcher
         {
             get { return winner; }
         }
 
-        public MLBDecisionPitcher LosingPitcher
+        public MLBPitcher LosingPitcher
         {
             get { return loser; }
         }
@@ -72,7 +72,7 @@ namespace MLiB
             data_dir = game.Attribute("game_data_directory").Value;
 
 
-            winner = new MLBDecisionPitcher(
+            winner = new MLBPitcher(
                 Convert.ToInt32(game.Element("winning_pitcher").Attribute("id").Value),
                 game.Element("winning_pitcher").Attribute("last").Value,
                 game.Element("winning_pitcher").Attribute("first").Value,
@@ -81,7 +81,7 @@ namespace MLiB
                 Convert.ToInt32(game.Element("winning_pitcher").Attribute("wins").Value),
                 Convert.ToInt32(game.Element("winning_pitcher").Attribute("losses").Value));
             
-            loser = new MLBDecisionPitcher(
+            loser = new MLBPitcher(
                 Convert.ToInt32(game.Element("losing_pitcher").Attribute("id").Value),
                 game.Element("losing_pitcher").Attribute("last").Value,
                 game.Element("losing_pitcher").Attribute("first").Value,

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MLBBatter.cs" />
     <Compile Include="MLBClosingPitcher.cs" />
     <Compile Include="MLBCompletedGame.cs" />
     <Compile Include="MLBExpandedCompletedGame.cs" />
@@ -48,7 +49,7 @@
     <Compile Include="MLBParser.cs" />
     <Compile Include="MLBScoreboardOnDay.cs" />
     <Compile Include="MLBTeam.cs" />
-    <Compile Include="MLBDecisionPitcher.cs" />
+    <Compile Include="MLBPitcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
