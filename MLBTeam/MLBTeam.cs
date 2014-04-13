@@ -53,12 +53,12 @@ namespace MLiB
             get { return m_gbwc; }
         }
 
-        public int TeamWins
+        public int Wins
         {
             get { return m_wins; }
         }
 
-        public int TeamLosses
+        public int Losses
         {
             get { return m_losses; }
         }
