@@ -66,7 +66,9 @@ namespace MLiB
 
         public MLBGameCompleted(XElement game)
         {
-            int runs, hits, errors, sb, hr;
+            int aruns, ahits, aerrors, asb, ahr;
+            int hruns, hhits, herrors, hsb, hhr;
+            bool away_won;
 
             IEnumerable<XElement> i_innings = game.Element("linescore").Elements("inning");
             data_dir = game.Attribute("game_data_directory").Value;
@@ -110,13 +112,21 @@ namespace MLiB
                     innings.Add(new MLBInning(inning.Attribute("away").Value, ""));
             }
 
-            runs = Convert.ToInt32(game.Element("linescore").Element("r").Attribute("away").Value);
-            hits = Convert.ToInt32(game.Element("linescore").Element("h").Attribute("away").Value);
-            errors = Convert.ToInt32(game.Element("linescore").Element("e").Attribute("away").Value);
-            sb = Convert.ToInt32(game.Element("linescore").Element("sb").Attribute("away").Value);
-            hr = Convert.ToInt32(game.Element("linescore").Element("hr").Attribute("away").Value);
+            aruns = Convert.ToInt32(game.Element("linescore").Element("r").Attribute("away").Value);
+            ahits = Convert.ToInt32(game.Element("linescore").Element("h").Attribute("away").Value);
+            aerrors = Convert.ToInt32(game.Element("linescore").Element("e").Attribute("away").Value);
+            asb = Convert.ToInt32(game.Element("linescore").Element("sb").Attribute("away").Value);
+            ahr = Convert.ToInt32(game.Element("linescore").Element("hr").Attribute("away").Value);
 
-            away_team = new MLBTeamCompleted(
+            hruns = Convert.ToInt32(game.Element("linescore").Element("r").Attribute("home").Value);
+            hhits = Convert.ToInt32(game.Element("linescore").Element("h").Attribute("home").Value);
+            herrors = Convert.ToInt32(game.Element("linescore").Element("e").Attribute("home").Value);
+            hsb = Convert.ToInt32(game.Element("linescore").Element("sb").Attribute("home").Value);
+            hhr = Convert.ToInt32(game.Element("linescore").Element("hr").Attribute("home").Value);
+
+            away_won = (aruns > hruns);
+
+                away_team = new MLBTeamCompleted(
                 game.Attribute("away_team_city").Value,
                 game.Attribute("away_team_name").Value,
                 game.Attribute("away_division").Value,
@@ -125,18 +135,13 @@ namespace MLiB
                 game.Attribute("away_games_back_wildcard").Value,
                 Convert.ToInt32(game.Attribute("away_win").Value),
                 Convert.ToInt32(game.Attribute("away_loss").Value),
-                runs,
-                hits,
-                errors,
-                hr,
-                sb
+                aruns,
+                ahits,
+                aerrors,
+                ahr,
+                asb,
+                away_won
                 );
-
-            runs = Convert.ToInt32(game.Element("linescore").Element("r").Attribute("home").Value);
-            hits = Convert.ToInt32(game.Element("linescore").Element("h").Attribute("home").Value);
-            errors = Convert.ToInt32(game.Element("linescore").Element("e").Attribute("home").Value);
-            sb = Convert.ToInt32(game.Element("linescore").Element("sb").Attribute("home").Value);
-            hr = Convert.ToInt32(game.Element("linescore").Element("hr").Attribute("home").Value);
 
             home_team = new MLBTeamCompleted(
                 game.Attribute("home_team_city").Value,
@@ -147,15 +152,16 @@ namespace MLiB
                 game.Attribute("home_games_back_wildcard").Value,
                 Convert.ToInt32(game.Attribute("home_win").Value),
                 Convert.ToInt32(game.Attribute("home_loss").Value),
-                runs,
-                hits,
-                errors,
-                hr,
-                sb
+                hruns,
+                hhits,
+                herrors,
+                hhr,
+                hsb,
+                !away_won
                 );
 
             id = game.Attribute("id").Value;
             park = game.Attribute("venue").Value;
         }
-    } 
+    }
 }

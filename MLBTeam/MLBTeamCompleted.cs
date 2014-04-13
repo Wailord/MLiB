@@ -13,6 +13,12 @@ namespace MLiB
         private int errors;
         private int sb;
         private int hr;
+        private bool won;
+
+        public bool Won
+        {
+            get { return won; }
+        }
 
         public int Runs
         {
@@ -41,7 +47,7 @@ namespace MLiB
 
 
         public MLBTeamCompleted(string city, string name, string division, string league, string gb,
-            string gbwc, int wins, int losses, int runs, int hits, int errors, int hr, int sb)
+            string gbwc, int wins, int losses, int runs, int hits, int errors, int hr, int sb, bool won)
             : base(city, name, division, league, gb, gbwc, wins, losses)
         {
             this.runs = runs;
@@ -49,6 +55,7 @@ namespace MLiB
             this.errors = errors;
             this.sb = sb;
             this.hr = hr;
+            this.won = won;
         }
     }
 }

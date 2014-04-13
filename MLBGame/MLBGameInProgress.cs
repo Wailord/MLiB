@@ -18,6 +18,18 @@ namespace MLiB
         private MLBTeamActive away_team;
         private MLBTeamActive home_team;
         private List<MLBInning> innings = new List<MLBInning>();
+        private BaseSituations base_situation;
+
+        public enum BaseSituations
+        {
+            BasesEmpty = 0, RunnerOnFirst, RunnerOnFirstAndSecond, RunnerOnFirstAndThird,
+            BasesLoaded, RunnerOnSecond, RunnerOnSecondAndThird, RunnerOnThird
+        }
+
+        public BaseSituations BaseSituation
+        {
+            get { return base_situation; }
+        }
 
         public string LastPlay
         {
