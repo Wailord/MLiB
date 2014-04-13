@@ -118,6 +118,7 @@ namespace MLiB
                 game.Attribute("away_games_back_wildcard").Value,
                 Convert.ToInt32(game.Attribute("away_win").Value),
                 Convert.ToInt32(game.Attribute("away_loss").Value),
+                game.Attribute("away_name_abbrev").Value,
                 runs,
                 hits,
                 errors
@@ -138,6 +139,7 @@ namespace MLiB
                 game.Attribute("home_games_back_wildcard").Value,
                 Convert.ToInt32(game.Attribute("home_win").Value),
                 Convert.ToInt32(game.Attribute("home_loss").Value),
+                game.Attribute("home_name_abbrev").Value,
                 runs,
                 hits,
                 errors

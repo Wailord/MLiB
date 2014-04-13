@@ -16,6 +16,12 @@ namespace MLiB
         private string m_gbwc;
         private int m_wins;
         private int m_losses;
+        private string abb;
+
+        public string Abbreviation
+        {
+            get { return abb; }
+        }
 
         public string City
         {
@@ -24,7 +30,7 @@ namespace MLiB
 
         public string Nickname
         {
-            get { return m_name;  }
+            get { return m_name; }
         }
 
         public string Division
@@ -64,9 +70,15 @@ namespace MLiB
         }
 
         public MLBTeam(string city, string name, string division, string league, string gb,
-            string gbwc, int wins, int losses)
+            string gbwc, int wins, int losses, string abb)
         {
             m_city = city;
+
+            if (m_city == "NY Yankees" || m_city == "NY Mets")
+                m_city = "New York";
+            else if (m_city == "LA Angels" || m_city == "LA Dodgers")
+                m_city = "Los Angeles";
+
             m_name = name;
             m_division = division;
             m_league = league;
@@ -74,6 +86,7 @@ namespace MLiB
             m_gbwc = gbwc;
             m_wins = wins;
             m_losses = losses;
+            this.abb = abb;
         }
     }
 }

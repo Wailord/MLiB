@@ -34,8 +34,8 @@ namespace MLiB
         }
 
         public MLBTeamCompleted(string city, string name, string division, string league, string gb,
-            string gbwc, int wins, int losses, int runs, int hits, int errors, bool won)
-            : base(city, name, division, league, gb, gbwc, wins, losses)
+            string gbwc, int wins, int losses, string abb, int runs, int hits, int errors, bool won)
+            : base(city, name, division, league, gb, gbwc, wins, losses, abb)
         {
             this.runs = runs;
             this.hits = hits;
