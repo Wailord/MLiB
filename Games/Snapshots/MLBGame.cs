@@ -53,6 +53,11 @@ namespace MLiB
                 start = start.AddHours(12);
         }
 
+        public MLBFullGame GetFullGame()
+        {
+            return new MLBFullGame(this);
+        }
+
         public override abstract string ToString();
     }
 }
