@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace MLiB
 {
-    public class MLBFullInning
+    public class MLBFullHalfInning
     {
+        private List<MLBAtBat> at_bats;
+
+        public MLBFullHalfInning()
+        {
+        }
     }
 }
