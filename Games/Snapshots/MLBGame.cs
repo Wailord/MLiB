@@ -63,11 +63,11 @@ namespace MLiB
             return new MLBFullGame(this);
         }
 
-        public MLBPitch GetLastPitch()
+        public MLBAtBat GetMostRecentAtBat()
         {
             MLBFullGame full = new MLBFullGame(this);
 
-            return full.Innings.Last().MostRecent.AtBats.Last().Pitches.Last();
+            return full.Innings.Last().MostRecent.AtBats.Last();
         }
 
         public override abstract string ToString();

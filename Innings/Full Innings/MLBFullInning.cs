@@ -35,9 +35,9 @@ namespace MLiB
 
         public MLBFullInning(XElement inning)
         {
-            if(inning.Element("top") != null)
+            if(inning.Element("top") != null && inning.Element("top").Elements("atbat") != null)
                 top = new MLBFullHalfInning(inning.Element("top"));
-            if(inning.Element("bottom") != null)
+            if (inning.Element("bottom") != null && inning.Element("bottom").Elements("atbat") != null)
                 bottom = new MLBFullHalfInning(inning.Element("bottom"));
         }
     }

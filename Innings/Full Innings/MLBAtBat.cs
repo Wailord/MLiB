@@ -14,6 +14,7 @@ namespace MLiB
         private int balls;
         private int outs;
         private string result;
+        private string bheight;
         private bool vs_righty;
 
         public bool RightHandedBatter
@@ -51,6 +52,17 @@ namespace MLiB
             get { return pitches; }
         }
 
+        public int BatterHeight
+        {
+            get
+            {
+                int feet = int.Parse(bheight.Substring(0, 1));
+                int inches = Convert.ToInt32(bheight.Substring(2));
+
+                return feet * 12 + inches;
+            }
+        }
+
         public MLBAtBat(XElement atbat)
         {
             IEnumerable<XElement> lpitches = atbat.Elements("pitch");
@@ -60,6 +72,8 @@ namespace MLiB
             outs = Convert.ToInt32(atbat.Attribute("o").Value);
             result = atbat.Attribute("des").Value;
             vs_righty = (atbat.Attribute("stand").Value == "R");
+
+            bheight = atbat.Attribute("b_height").Value; 
 
             foreach (XElement pitch in lpitches)
             {
