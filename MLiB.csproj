@@ -41,21 +41,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MLBGame\MLBGame.cs" />
-    <Compile Include="MLBPlayer\MLBBatter.cs" />
-    <Compile Include="MLBPlayer\MLBPitcherClosing.cs" />
-    <Compile Include="MLBGame\MLBGameCompleted.cs" />
-    <Compile Include="MLBGame\MLBGameFuture.cs" />
-    <Compile Include="MLBInning.cs" />
-    <Compile Include="MLBGame\MLBGameInProgress.cs" />
-    <Compile Include="MLBPlayer\MLBPlayer.cs" />
+    <Compile Include="Games\Full Games\MLBFullGame.cs" />
+    <Compile Include="Games\Snapshots\MLBGame.cs" />
+    <Compile Include="Innings\Full Innings\MLBAtBat.cs" />
+    <Compile Include="Innings\Full Innings\MLBFullHalfInning.cs" />
+    <Compile Include="Innings\Full Innings\MLBFullInning.cs" />
+    <Compile Include="Innings\Full Innings\MLBPitch.cs" />
+    <Compile Include="MLBLinescore.cs" />
+    <Compile Include="Players\Full Players\MLBFullBatter.cs" />
+    <Compile Include="Players\Full Players\MLBFullPitcher.cs" />
+    <Compile Include="Players\Snapshots\MLBBatter.cs" />
+    <Compile Include="Players\Snapshots\MLBPitcherClosing.cs" />
+    <Compile Include="Games\Snapshots\MLBGameCompleted.cs" />
+    <Compile Include="Games\Snapshots\MLBGameFuture.cs" />
+    <Compile Include="Innings\Snapshots\MLBInning.cs" />
+    <Compile Include="Games\Snapshots\MLBGameInProgress.cs" />
+    <Compile Include="Players\Snapshots\MLBPlayer.cs" />
     <Compile Include="MLBScoreboardOnDay.cs" />
-    <Compile Include="MLBTeam\MLBTeam.cs" />
-    <Compile Include="MLBPlayer\MLBPitcher.cs" />
-    <Compile Include="MLBTeam\MLBTeamActive.cs" />
-    <Compile Include="MLBTeam\MLBTeamCompleted.cs" />
+    <Compile Include="Teams\Full Teams\MLBFullTeam.cs" />
+    <Compile Include="Teams\Snapshots\MLBTeam.cs" />
+    <Compile Include="Players\Snapshots\MLBPitcher.cs" />
+    <Compile Include="Teams\Snapshots\MLBTeamActive.cs" />
+    <Compile Include="Teams\Snapshots\MLBTeamCompleted.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

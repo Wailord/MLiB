@@ -41,6 +41,11 @@ namespace MLiB
             get { return id; }
         }
 
+        public string DataDirectory
+        {
+            get { return data_dir; }
+        }
+
         public MLBGame(XElement game)
         {
             data_dir = game.Attribute("game_data_directory").Value;

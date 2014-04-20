@@ -12,9 +12,20 @@ namespace MLiB
         private MLBFullHalfInning top;
         private MLBFullHalfInning bottom;
 
+        public MLBFullHalfInning Top
+        {
+            get { return top; }
+        }
+
+        public MLBFullHalfInning Bottom
+        {
+            get { return bottom; }
+        }
+
         public MLBFullInning(XElement inning)
         {
-            // parse top of the inning, then bottom
+            top = new MLBFullHalfInning(inning.Element("top"));
+            bottom = new MLBFullHalfInning(inning.Element("bottom"));
         }
     }
 }

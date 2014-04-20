@@ -9,22 +9,23 @@ namespace MLiB
 {
     public class MLBFullGame
     {
-        List<MLBFullInning> innings;
+        List<MLBFullInning> innings = new List<MLBFullInning>();
         MLBLinescore linescore;
         MLBFullTeam away;
         MLBFullTeam home;
 
+        public List<MLBFullInning> Innings
+        {
+            get { return innings; }
+        }
+
         public MLBFullGame(MLBGame snapshot)
         {
             // create full game from passed in snapshot
-            IEnumerable<XElement> l_innings = XDocument.Load("http://gd2.mlb.com/components/game/mlb/year_"
-                    + snapshot.StartTime.Year + "/month_" + (snapshot.StartTime.Month <= 9 ? "0" : "")
-                    + snapshot.StartTime.Month + "/day_" + (snapshot.StartTime.Day <= 9 ? "0" : "")
-                    + snapshot.StartTime.Day + "/" + snapshot.ID + "/inning/inning_all.xml").Elements("inning");
+            IEnumerable<XElement> l_innings = XDocument.Load("http://gd2.mlb.com/" + snapshot.DataDirectory + "/inning/inning_all.xml").Element("game").Elements("inning");
 
             foreach (XElement inning in l_innings)
                 innings.Add(new MLBFullInning(inning));
-
 
         }
     }
