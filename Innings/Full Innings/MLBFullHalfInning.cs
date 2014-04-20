@@ -18,10 +18,13 @@ namespace MLiB
 
         public MLBFullHalfInning(XElement half)
         {
-            IEnumerable<XElement> atbats = half.Elements("atbat");
-            foreach (XElement atbat in atbats)
+            if (half != null)
             {
-                at_bats.Add(new MLBAtBat(atbat));
+                IEnumerable<XElement> atbats = half.Elements("atbat");
+                foreach (XElement atbat in atbats)
+                {
+                    at_bats.Add(new MLBAtBat(atbat));
+                }
             }
         }
     }

@@ -22,10 +22,23 @@ namespace MLiB
             get { return bottom; }
         }
 
+        public MLBFullHalfInning MostRecent
+        {
+            get
+            {
+                if (bottom == null)
+                    return top;
+                else
+                    return bottom;
+            }
+        }
+
         public MLBFullInning(XElement inning)
         {
-            top = new MLBFullHalfInning(inning.Element("top"));
-            bottom = new MLBFullHalfInning(inning.Element("bottom"));
+            if(inning.Element("top") != null)
+                top = new MLBFullHalfInning(inning.Element("top"));
+            if(inning.Element("bottom") != null)
+                bottom = new MLBFullHalfInning(inning.Element("bottom"));
         }
     }
 }

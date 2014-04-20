@@ -16,19 +16,21 @@ namespace MLiB
 
         PitchResult result;
         string desc;
-        float x;
-        float y;
+        float top_of_zone;
+        float bottom_of_zone;
+        float px;
+        float pz;
         float speed;
         int num;
 
         public float X
         {
-            get { return x; }
+            get { return px * 12; }
         }
 
         public float Y
         {
-            get { return y; }
+            get { return pz * 12; }
         }
 
         public float Velocity
@@ -61,6 +63,16 @@ namespace MLiB
             get { return desc; }
         }
 
+        public float BottomOfZone
+        {
+            get { return bottom_of_zone * 12; }
+        }
+
+        public float TopOfZone
+        {
+            get { return top_of_zone * 12; }
+        }
+
         public MLBPitch(XElement pitch)
         {
             switch(pitch.Attribute("type").Value.ToString())
@@ -77,8 +89,11 @@ namespace MLiB
             }
             
             desc = pitch.Attribute("des").Value.ToString();
-            x = Convert.ToSingle(pitch.Attribute("x").Value);
-            y = Convert.ToSingle(pitch.Attribute("y").Value);
+            px = Convert.ToSingle(pitch.Attribute("px").Value);
+            pz = Convert.ToSingle(pitch.Attribute("pz").Value);
+            top_of_zone = Convert.ToSingle(pitch.Attribute("sz_top").Value);
+            bottom_of_zone = Convert.ToSingle(pitch.Attribute("sz_bot").Value);
+            
             if (pitch.Attribute("start_speed") != null)
                 speed = Convert.ToSingle(pitch.Attribute("start_speed").Value);
             else
