@@ -15,7 +15,8 @@ namespace MLiB
         protected string data_dir;
         protected DateTime start;
         protected GameStatus status;
-
+        protected List<MLBBatter> hr_hitters = new List<MLBBatter>();
+        
         public enum GameStatus
         {
             Completed, Future, InProgress
@@ -24,6 +25,11 @@ namespace MLiB
         public GameStatus Status
         {
             get { return status; }
+        }
+
+        public List<MLBBatter> HomeRunHitters
+        {
+            get { return hr_hitters; }
         }
 
         public DateTime StartTime
@@ -56,6 +62,33 @@ namespace MLiB
 
             if (game.Attribute("ampm").Value == "PM")
                 start = start.AddHours(12);
+
+                  // get HR hitters
+            XElement homer_section = game.Element("home_runs");
+            if (homer_section != null)
+            {
+                IEnumerable<XElement> homers = homer_section.Elements("player");
+
+                foreach (XElement player in homers)
+                {
+                    hr_hitters.Add(
+                    new MLBBatter(Convert.ToInt32(player.Attribute("id").Value),
+                        player.Attribute("last").Value,
+                        player.Attribute("first").Value,
+                        Convert.ToInt32(player.Attribute("number").Value),
+                        "HR",
+                        0,
+                        0,
+                        0,
+                        Convert.ToInt32(player.Attribute("hr").Value),
+                        0,
+                        0,
+                        0,
+                        0,
+                        start)
+                        );
+                }
+            }
         }
 
         public MLBFullGame GetFullGame()

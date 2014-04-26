@@ -27,8 +27,8 @@ namespace MLiB
         }
 
 
-        public MLBPitcher(int id, string last, string first, int num, float era, int w, int l)
-            : base(id, last, first, num)
+        public MLBPitcher(int id, string last, string first, int num, float era, int w, int l, DateTime date)
+            : base(id, last, first, num, date)
         {
             this.era = era;
             this.w = w;

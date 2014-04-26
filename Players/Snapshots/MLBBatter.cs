@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using System.Threading.Tasks;
 
 namespace MLiB
@@ -17,6 +18,19 @@ namespace MLiB
         private float slg;
         private float ops;
         private float obp;
+
+        public SingleGameBattingStatistics GameStats
+        {
+            get
+            {
+                string player_page = "http://gd2.mlb.com/components/game/mlb/year_"
+                    + time.Year + "/month_" + ((time.Month > 9) ? ("") : ("0")) + time.Month
+                    + "/day_" + ((time.Day > 9) ? ("") : ("0"))+ time.Day
+                    + "/batters/" + id + "_1.xml";
+
+                return new SingleGameBattingStatistics(player_page);
+            } 
+        }
 
         public string Position
         {
@@ -64,8 +78,9 @@ namespace MLiB
         }
 
         public MLBBatter(int ID, string last, string first, int number, string pos,
-            int ab, int h, float avg, int hr, int rbi, float slg, float ops, float obp)
-            : base(ID, last, first, number)
+            int ab, int h, float avg, int hr, int rbi, float slg, float ops, float obp,
+            DateTime date)
+            : base(ID, last, first, number, date)
         {
             this.pos = pos;
             this.ab = ab;

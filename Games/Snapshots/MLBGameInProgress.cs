@@ -161,7 +161,8 @@ namespace MLiB
                 Convert.ToInt32(game.Element("batter").Attribute("rbi").Value),
                 Convert.ToSingle(game.Element("batter").Attribute("slg").Value),
                 Convert.ToSingle(game.Element("batter").Attribute("ops").Value),
-                Convert.ToSingle(game.Element("batter").Attribute("obp").Value)
+                Convert.ToSingle(game.Element("batter").Attribute("obp").Value),
+                start
                 );
 
             if (game.Element("pitcher").Attribute("era").Value == "-.--"
@@ -178,7 +179,8 @@ namespace MLiB
                     Convert.ToInt32(game.Element("pitcher").Attribute("number").Value),
                     Convert.ToSingle(game.Element("pitcher").Attribute("era").Value),
                     Convert.ToInt32(game.Element("pitcher").Attribute("wins").Value),
-                    Convert.ToInt32(game.Element("pitcher").Attribute("losses").Value));
+                    Convert.ToInt32(game.Element("pitcher").Attribute("losses").Value),
+                    start);
             }
 
             switch (game.Element("runners_on_base").Attribute("status").Value)
@@ -212,6 +214,8 @@ namespace MLiB
             cur_balls = Convert.ToInt32(game.Element("status").Attribute("b").Value);
             cur_strikes = Convert.ToInt32(game.Element("status").Attribute("s").Value);
             cur_outs = Convert.ToInt32(game.Element("status").Attribute("o").Value);
+
+            // get HR hitters
 
             status = GameStatus.InProgress;
         }

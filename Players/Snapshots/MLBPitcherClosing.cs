@@ -20,8 +20,9 @@ namespace MLiB
             get { return svo; }
         }
 
-        public MLBPitcherClosing(int id, string last, string first, int num, float ERA, int sv, int svo, int w, int l)
-            : base(id, last, first, num, ERA, w, l)
+        public MLBPitcherClosing(int id, string last, string first, int num,
+            float ERA, int sv, int svo, int w, int l, DateTime date)
+            : base(id, last, first, num, ERA, w, l, date)
         {
             this.sv = sv;
             this.svo = svo;

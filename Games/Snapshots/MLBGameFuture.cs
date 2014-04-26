@@ -77,7 +77,8 @@ namespace MLiB
                     0,
                     0,
                     0,
-                    0);
+                    0,
+                    start);
             }
             else
             {
@@ -94,7 +95,8 @@ namespace MLiB
                         Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("number").Value),
                         era,
                         Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("wins").Value),
-                        Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("losses").Value)
+                        Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("losses").Value),
+                        start
                         );
                 }
             }
@@ -108,7 +110,8 @@ namespace MLiB
                     0,
                     0,
                     0,
-                    0);
+                    0,
+                    start);
             }
             else
             {
@@ -123,7 +126,8 @@ namespace MLiB
                     Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("number").Value),
                     era,
                     Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("wins").Value),
-                    Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("losses").Value)
+                    Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("losses").Value),
+                    start
                     );
             }
 

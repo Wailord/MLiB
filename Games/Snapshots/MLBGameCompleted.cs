@@ -67,7 +67,8 @@ namespace MLiB
                 Convert.ToInt32(game.Element("winning_pitcher").Attribute("number").Value),
                 Convert.ToSingle(game.Element("winning_pitcher").Attribute("era").Value),
                 Convert.ToInt32(game.Element("winning_pitcher").Attribute("wins").Value),
-                Convert.ToInt32(game.Element("winning_pitcher").Attribute("losses").Value));
+                Convert.ToInt32(game.Element("winning_pitcher").Attribute("losses").Value),
+                start);
             
             loser = new MLBPitcher(
                 Convert.ToInt32(game.Element("losing_pitcher").Attribute("id").Value),
@@ -76,7 +77,8 @@ namespace MLiB
                 Convert.ToInt32(game.Element("losing_pitcher").Attribute("number").Value),
                 Convert.ToSingle(game.Element("losing_pitcher").Attribute("era").Value),
                 Convert.ToInt32(game.Element("losing_pitcher").Attribute("wins").Value),
-                Convert.ToInt32(game.Element("losing_pitcher").Attribute("losses").Value));
+                Convert.ToInt32(game.Element("losing_pitcher").Attribute("losses").Value),
+                start);
 
             if (game.Element("save_pitcher").Attribute("id").Value != "")
                 closer = new MLBPitcherClosing(
@@ -88,7 +90,8 @@ namespace MLiB
                     Convert.ToInt32(game.Element("save_pitcher").Attribute("saves").Value),
                     Convert.ToInt32(game.Element("save_pitcher").Attribute("svo").Value),
                     Convert.ToInt32(game.Element("losing_pitcher").Attribute("wins").Value),
-                    Convert.ToInt32(game.Element("losing_pitcher").Attribute("losses").Value));
+                    Convert.ToInt32(game.Element("losing_pitcher").Attribute("losses").Value),
+                    start);
 
             foreach (XElement inning in i_innings)
             {
@@ -140,7 +143,7 @@ namespace MLiB
                     !away_won
                     );
 
-                status = GameStatus.Completed;
+            status = GameStatus.Completed;
         }
 
         public override string ToString()

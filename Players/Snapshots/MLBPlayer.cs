@@ -11,6 +11,7 @@ namespace MLiB
 {
     public class MLBPlayer
     {
+        protected DateTime time;
         protected int id;
         protected string last;
         protected string first;
@@ -47,12 +48,13 @@ namespace MLiB
             get { return number; }
         }
 
-        public MLBPlayer(int id, string last, string first, int number)
+        public MLBPlayer(int id, string last, string first, int number, DateTime date)
         {
             this.id = id;
             this.last = last;
             this.first = first;
             this.number = number;
+            this.time = date;
         }
 
         public override string ToString()
