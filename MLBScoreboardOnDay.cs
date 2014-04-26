@@ -72,7 +72,7 @@ namespace MLiB
                         case "Delayed":
                             ongoing_games.Add(new MLBGameInProgress(game));
                             break;
-                        case "ChallengeManager":
+                        case "Manager Challenge":
                             ongoing_games.Add(new MLBGameInProgress(game));
                             break;
                         default:
