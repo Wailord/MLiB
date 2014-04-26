@@ -38,10 +38,14 @@ namespace MLiB
         {
             try
             {
-                IEnumerable<XElement> todays_games = XDocument.Load("http://gd2.mlb.com/components/game/mlb/year_"
+                 XDocument mlb_xml = XDocument.Load("http://gd2.mlb.com/components/game/mlb/year_"
                     + date.Year + "/month_" + (date.Month <= 9 ? "0" : "")
                     + date.Month + "/day_" + (date.Day <= 9 ? "0" : "")
-                    + date.Day + "/master_scoreboard.xml").Element("games").Elements("game");
+                    + date.Day + "/master_scoreboard.xml");
+
+                XElement game_element = mlb_xml.Element("games");
+
+                IEnumerable<XElement> todays_games = game_element.Elements("game");
 
                 foreach (XElement game in todays_games)
                 {
@@ -66,6 +70,9 @@ namespace MLiB
                             future_games.Add(new MLBGameFuture(game));
                             break;
                         case "Delayed":
+                            ongoing_games.Add(new MLBGameInProgress(game));
+                            break;
+                        case "ChallengeManager":
                             ongoing_games.Add(new MLBGameInProgress(game));
                             break;
                         default:
