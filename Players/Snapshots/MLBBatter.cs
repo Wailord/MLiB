@@ -18,18 +18,11 @@ namespace MLiB
         private float slg;
         private float ops;
         private float obp;
+        private SingleGameBattingStatistics game_stats;
 
         public SingleGameBattingStatistics GameStats
         {
-            get
-            {
-                string player_page = "http://gd2.mlb.com/components/game/mlb/year_"
-                    + time.Year + "/month_" + ((time.Month > 9) ? ("") : ("0")) + time.Month
-                    + "/day_" + ((time.Day > 9) ? ("") : ("0"))+ time.Day
-                    + "/batters/" + id + "_1.xml";
-
-                return new SingleGameBattingStatistics(player_page);
-            } 
+            get { return game_stats;  } 
         }
 
         public string Position
@@ -91,6 +84,13 @@ namespace MLiB
             this.slg = slg;
             this.ops = ops;
             this.obp = obp;
+
+             string player_page = "http://gd2.mlb.com/components/game/mlb/year_"
+                    + time.Year + "/month_" + ((time.Month > 9) ? ("") : ("0")) + time.Month
+                    + "/day_" + ((time.Day > 9) ? ("") : ("0"))+ time.Day
+                    + "/batters/" + id + "_1.xml";
+
+             this.game_stats = new SingleGameBattingStatistics(player_page);
         }
 
         public override string ToString()

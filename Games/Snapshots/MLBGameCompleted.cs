@@ -57,25 +57,49 @@ namespace MLiB
             int aruns, ahits, aerrors;
             int hruns, hhits, herrors;
             bool away_won;
+            float era;
+            int number;
 
             IEnumerable<XElement> i_innings = game.Element("linescore").Elements("inning");
+
+            if (game.Element("winning_pitcher").Attribute("era").Value == "-.--"
+                    || game.Element("winning_pitcher").Attribute("era").Value == "-")
+                era = 0;
+            else
+                era = Convert.ToSingle(game.Element("winning_pitcher").Attribute("era").Value);
+
+            if (game.Element("winning_pitcher").Attribute("number").Value == "")
+                number = 0;
+            else
+                number = Convert.ToInt32(game.Element("winning_pitcher").Attribute("number").Value);
 
             winner = new MLBPitcher(
                 Convert.ToInt32(game.Element("winning_pitcher").Attribute("id").Value),
                 game.Element("winning_pitcher").Attribute("last").Value,
                 game.Element("winning_pitcher").Attribute("first").Value,
-                Convert.ToInt32(game.Element("winning_pitcher").Attribute("number").Value),
-                Convert.ToSingle(game.Element("winning_pitcher").Attribute("era").Value),
+                number,
+                era,
                 Convert.ToInt32(game.Element("winning_pitcher").Attribute("wins").Value),
                 Convert.ToInt32(game.Element("winning_pitcher").Attribute("losses").Value),
                 start);
-            
+
+            if (game.Element("losing_pitcher").Attribute("era").Value == "-.--"
+                    || game.Element("losing_pitcher").Attribute("era").Value == "-")
+                era = 0;
+            else
+                era = Convert.ToSingle(game.Element("losing_pitcher").Attribute("era").Value);
+
+            if (game.Element("losing_pitcher").Attribute("number").Value == "")
+                number = 0;
+            else
+                number = Convert.ToInt32(game.Element("losing_pitcher").Attribute("number").Value);
+
             loser = new MLBPitcher(
                 Convert.ToInt32(game.Element("losing_pitcher").Attribute("id").Value),
                 game.Element("losing_pitcher").Attribute("last").Value,
                 game.Element("losing_pitcher").Attribute("first").Value,
-                Convert.ToInt32(game.Element("losing_pitcher").Attribute("number").Value),
-                Convert.ToSingle(game.Element("losing_pitcher").Attribute("era").Value),
+                number,
+                era,
                 Convert.ToInt32(game.Element("losing_pitcher").Attribute("wins").Value),
                 Convert.ToInt32(game.Element("losing_pitcher").Attribute("losses").Value),
                 start);

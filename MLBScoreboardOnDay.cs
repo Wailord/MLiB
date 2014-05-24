@@ -76,7 +76,9 @@ namespace MLiB
                             ongoing_games.Add(new MLBGameInProgress(game));
                             break;
                         default:
-                            Console.Write(game.Element("status").Attribute("status").Value);
+                            // uncomment to see console output of any games that aren't added
+                            // to the games list; usually postponed/delayed games
+                        //Console.Write(game.Element("status").Attribute("status").Value);
                             break;
                     }
                 }

@@ -148,11 +148,22 @@ namespace MLiB
             
             last_play = Regex.Replace(game.Element("pbp").Attribute("last").Value, @"\s+", " ");
 
+            int num;
+
+            try
+            {
+                num = Convert.ToInt32(game.Element("batter").Attribute("number").Value);
+            }
+            catch (Exception)
+            {
+                num = 0;
+            }
+
             cur_batter = new MLBBatter(
                 Convert.ToInt32(game.Element("batter").Attribute("id").Value),
                 game.Element("batter").Attribute("last").Value,
                 game.Element("batter").Attribute("first").Value,
-                Convert.ToInt32(game.Element("batter").Attribute("number").Value),
+                num,
                 game.Element("batter").Attribute("pos").Value,
                 Convert.ToInt32(game.Element("batter").Attribute("ab").Value),
                 Convert.ToInt32(game.Element("batter").Attribute("h").Value),

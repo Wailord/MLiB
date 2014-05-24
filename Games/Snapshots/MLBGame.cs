@@ -16,7 +16,7 @@ namespace MLiB
         protected DateTime start;
         protected GameStatus status;
         protected List<MLBBatter> hr_hitters = new List<MLBBatter>();
-        
+
         public enum GameStatus
         {
             Completed, Future, InProgress
@@ -71,11 +71,28 @@ namespace MLiB
 
                 foreach (XElement player in homers)
                 {
+                    int num, pid;
+                    try
+                    {
+                        num = Convert.ToInt32(player.Attribute("number").Value);
+                    }
+                    catch (Exception)
+                    {
+                        num = 0;
+                    }
+                    try
+                    {
+                        pid = Convert.ToInt32(player.Attribute("id").Value);
+                    }
+                    catch (Exception)
+                    {
+                        pid = 0;
+                    }
                     hr_hitters.Add(
-                    new MLBBatter(Convert.ToInt32(player.Attribute("id").Value),
+                    new MLBBatter(pid,
                         player.Attribute("last").Value,
                         player.Attribute("first").Value,
-                        Convert.ToInt32(player.Attribute("number").Value),
+                        num,
                         "HR",
                         0,
                         0,

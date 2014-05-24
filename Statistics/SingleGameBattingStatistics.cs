@@ -95,6 +95,7 @@ namespace MLiB
 
             this.ab = Convert.ToInt32(batter.Attribute("ab").Value);
             this.r = Convert.ToInt32(batter.Attribute("r").Value);
+            this.h = Convert.ToInt32(batter.Attribute("h").Value);
             this.hr = Convert.ToInt32(batter.Attribute("hr").Value);
             this.rbi = Convert.ToInt32(batter.Attribute("rbi").Value);
             this.sb = Convert.ToInt32(batter.Attribute("sb").Value);
