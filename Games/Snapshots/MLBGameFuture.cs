@@ -38,6 +38,7 @@ namespace MLiB
             : base(game)
         {
             float era;
+            int num;
 
             away_team = new MLBTeam(
                game.Attribute("away_team_city").Value,
@@ -82,23 +83,26 @@ namespace MLiB
             }
             else
             {
+                if (game.Element("home_probable_pitcher").Attribute("number").Value == "")
+                    num = 0;
+                else
+                    num = Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("number").Value);
+
                 if (game.Element("home_probable_pitcher").Attribute("era").Value == "-.--")
                     era = 0;
                 else
-                {
                     era = Convert.ToSingle(game.Element("home_probable_pitcher").Attribute("era").Value);
 
                     home_prob = new MLBPitcher(
                         Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("id").Value),
                         game.Element("home_probable_pitcher").Attribute("last").Value,
                         game.Element("home_probable_pitcher").Attribute("first").Value,
-                        Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("number").Value),
+                        num,
                         era,
                         Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("wins").Value),
                         Convert.ToInt32(game.Element("home_probable_pitcher").Attribute("losses").Value),
                         start
                         );
-                }
             }
 
             if (game.Element("away_probable_pitcher").Attribute("id").Value == "")
@@ -119,11 +123,17 @@ namespace MLiB
                     era = 0;
                 else
                     era = Convert.ToSingle(game.Element("away_probable_pitcher").Attribute("era").Value);
+
+                if (game.Element("away_probable_pitcher").Attribute("number").Value == "")
+                    num = 0;
+                else
+                    num = Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("number").Value);
+
                 away_prob = new MLBPitcher(
                     Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("id").Value),
                     game.Element("away_probable_pitcher").Attribute("last").Value,
                     game.Element("away_probable_pitcher").Attribute("first").Value,
-                    Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("number").Value),
+                    num,
                     era,
                     Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("wins").Value),
                     Convert.ToInt32(game.Element("away_probable_pitcher").Attribute("losses").Value),
