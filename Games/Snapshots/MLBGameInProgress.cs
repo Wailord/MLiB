@@ -176,6 +176,16 @@ namespace MLiB
                 start
                 );
 
+
+            try
+            {
+                num = Convert.ToInt32(game.Element("pitcher").Attribute("number").Value);
+            }
+            catch (Exception)
+            {
+                num = 0;
+            }
+
             if (game.Element("pitcher").Attribute("era").Value == "-.--"
                 || game.Element("pitcher").Attribute("era").Value == "-")
                 era = 0;
@@ -187,7 +197,7 @@ namespace MLiB
                     Convert.ToInt32(game.Element("pitcher").Attribute("id").Value),
                     game.Element("pitcher").Attribute("last").Value,
                     game.Element("pitcher").Attribute("first").Value,
-                    Convert.ToInt32(game.Element("pitcher").Attribute("number").Value),
+                    num,
                     Convert.ToSingle(game.Element("pitcher").Attribute("era").Value),
                     Convert.ToInt32(game.Element("pitcher").Attribute("wins").Value),
                     Convert.ToInt32(game.Element("pitcher").Attribute("losses").Value),
